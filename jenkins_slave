@@ -1,0 +1,15 @@
+pipeline {
+    agent any
+    parameters {
+        string(name: 'name', defaultValue: '', description: 'Enter your name')
+        string(name: '--age', defaultValue: '', description: 'Enter your age')
+    }
+    stages {
+        stage('Example') {
+            steps {
+                echo "Hello ${params.name} age ${params.--age}"
+                sh 'python3  myscript.py'
+            }
+        }
+    }
+}
