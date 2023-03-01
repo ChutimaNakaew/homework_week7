@@ -12,14 +12,16 @@ pipeline {
         stage('build'){
             steps{
                 echo 'run py'
-                sh 'python3 myscript.py ${name} ${age}'
+                script {
+                    def outputString = sh(script: 'python3 myscript.py Alice 30', returnStdout: true).toString().trim()
+                }
             }
         }
         
         stage('Tigger the Slave Jobs') {
             steps {
                 echo 'Start Trigger to send name and age to slave'
-                build job: 'slave', parameters: [string(name: 'name', value: $name), string(name: 'age', value: $age)]
+                build job: 'slave', parameters: [string(name: 'name', value: ${outputString}), string(name: 'age', value: $age)]
             }
         }
     }
