@@ -1,10 +1,5 @@
 pipeline {
     agent any
-    
-    environment {
-        name = "Alice"
-        age = 20
-    }
 
     stages {
         
@@ -17,6 +12,9 @@ pipeline {
         stage('Tigger the Slave Jobs') {
             steps {
                 echo 'Start Trigger to send name and age to slave'
+                def name = sh (returnStdout:true, script:'info.py name').trim()
+                def age = sh (returnStdout:true, script:'info.py age').trim()
+                echo 'name = $name, age = $age'
                 sh 'python3 myscript.py ${name} ${age}'
                 build job: 'slave', parameters: [string(name: 'name', value: name), string(name: 'age', value: age)]
             }
