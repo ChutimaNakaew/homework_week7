@@ -8,11 +8,18 @@ pipeline {
                 echo 'Start Program'
             }
         }
-
+        
+        stage('build'){
+            steps{
+                echo 'run py'
+                sh 'python3 myscript.py ${name} ${age}'
+            }
+        }
+        
         stage('Tigger the Slave Jobs') {
             steps {
                 echo 'Start Trigger to send name and age to slave'
-                build job: 'slave', parameters: [string(name: 'name', value: 'Chutima'), string(name: 'age', value: '22')]
+                build job: 'slave', parameters: [string(name: 'name', value: $name), string(name: 'age', value: $age)]
             }
         }
     }
