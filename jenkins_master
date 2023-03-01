@@ -1,5 +1,10 @@
 pipeline {
     agent any
+    
+    parameters {
+        string(name: 'name', defaultValue: 'name', description: 'Enter your name')
+        string(name: 'age', defaultValue: 'age', description: 'Enter your age')
+    }
 
     stages {
         
@@ -12,11 +17,8 @@ pipeline {
         stage('Tigger the Slave Jobs') {
             steps {
                 echo 'Start Trigger to send name and age to slave'
-                script {
-                    def outputString = sh(script: 'python3 myscript.py Alice 30', returnStdout: true).toString().trim()
-                    echo '${outputString}'
-                }
-                build job: 'slave', parameters: [string(name: 'name', value: '${outputString}'), string(name: 'age', value: '20')]
+                sh 'python3 myscript.py Alice --age 30'
+                build job: 'slave', parameters: [string(name: 'name', value: '${name}'), string(name: 'age', value: '${age}')]
             }
         }
     }
