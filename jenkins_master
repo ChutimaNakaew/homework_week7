@@ -14,10 +14,10 @@ pipeline {
                 script{
                     echo 'Start Trigger to send name and age to slave'
                     
-                    def name = sh(returnStdout:true, script:'python3 info.py name').trim()
-                    echo 'name = $name'   
-                    def age = sh(returnStdout:true, script:'python3 info.py age').trim()
-                    echo 'age = $age'
+                    def name = sh(returnStdout:true, script:'python3 info.py name')
+                    echo 'name = ${name}'   
+                    def age = sh(returnStdout:true, script:'python3 info.py age')
+                    echo 'age = ${age}'
                     
                     sh 'python3 myscript.py ${name} ${age}'
                     build job: 'slave', parameters: [string(name: 'name', value: name), string(name: 'age', value: age)]
