@@ -17,12 +17,9 @@ pipeline {
                     script {
                         env.name = sh(script:'python3 info.py name', returnStdout: true).trim()
                         env.age = sh(script:'python3 info.py age', returnStdout: true).trim()
-                        env.TEST_VARIABLE = "some test value"
                     }
                     
-                    echo 'name = ${env.name}'
-                    echo 'age = ${env.age}'
-                    echo "TEST_VARIABLE = ${env.TEST_VARIABLE}"
+                    echo '${name} ${age}'
                     
                     sh 'python3 myscript.py ${name} ${age}'
                     build job: 'slave', parameters: [string(name: 'name', value: name), string(name: 'age', value: age)]
