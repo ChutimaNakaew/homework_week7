@@ -11,16 +11,15 @@ pipeline {
         
         stage('Tigger the Slave Jobs') {
             steps {
-                echo 'Start Trigger to send name and age to slave'
-                sh 'python3 myscript.py ${name} ${age}'
                 script{
+                    echo 'Start Trigger to send name and age to slave'
+                    sh 'python3 myscript.py ${name} ${age}'
                     def name = sh(returnStdout:true, script:'info.py name').trim()
-                    echo 'name = $name'
-                    
+                    echo 'name = $name'   
                     def age = sh(returnStdout:true, script:'info.py age').trim()
                     echo 'age = $age'
+                    build job: 'slave', parameters: [string(name: 'name', value: name), string(name: 'age', value: age)]
                 }
-                build job: 'slave', parameters: [string(name: 'name', value: name), string(name: 'age', value: age)]
             }
         }
     }
