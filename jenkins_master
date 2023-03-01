@@ -11,14 +11,14 @@ pipeline {
         
         stage('get name'){
             steps{
-                def name = sh (returnStdout:true, script:'info.py name').trim()
+                def name = sh(returnStdout:true, script:'info.py name').trim()
                 echo 'name = $name'
             }
         }
         
         stage('get age'){
             steps{
-                def age = sh (returnStdout:true, script:'info.py age').trim()
+                def age = sh(returnStdout:true, script:'info.py age').trim()
                 echo 'age = $age'
             }
         }
