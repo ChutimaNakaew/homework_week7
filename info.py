@@ -5,7 +5,7 @@ parser.add_argument("txt")
 args = parser.parse_args()
 
 if args.txt == 'name':
-  print('Alice')
+  print('Chutima')
 elif args.txt == 'age':
-  print(20)
+  print(22)
    
