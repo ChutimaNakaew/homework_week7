@@ -1,14 +1,13 @@
 import argparse
 
 parser = argparse.ArgumentParser()
-parser.add_argument("name", help="the name to greet")
-parser.add_argument("age", help="the age of the person being greeted", type=int)
+parser.add_argument("txt")
 args = parser.parse_args()
 
-if(args.name === 'name'){
+if(args.txt === 'name'){
   return 'Alice'
 }
-else if(args.age === 'age'){
+else if(args.txt === 'age'){
   return 20
 }
    
