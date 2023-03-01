@@ -5,10 +5,10 @@ parser.add_argument("name", help="the name to greet")
 parser.add_argument("age", help="the age of the person being greeted", type=int)
 args = parser.parse_args()
 
-if(args.name){
+if(args.name === 'name'){
   return 'Alice'
 }
-else if(args.age){
+else if(args.age === 'age'){
   return 20
 }
    
